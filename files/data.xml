@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<products>
+    <product><id>1</id>
+        <name>Iphone 12 mini</name>
+        <price>1000</price>
+        <description>Телефон</description>
+    </product>
+    <product>
+        <id>2</id>
+        <name>Airpods</name>
+        <price>200</price>
+        <description>Наушники</description>
+    </product>
+    <product>
+        <id>3</id>
+        <name>Iphone 12 pro max</name>
+        <price>1200</price>
+        <description>Телефон</description>
+    </product>
+</products>
