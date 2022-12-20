@@ -1,7 +1,14 @@
 <?php
-$dom = new DOMDocument();
-$dom->load('files/data.xml');
-$products = $dom->getElementsByTagName('products')->item(0);
+
+include "database.php";
+$query = $db->query('Select * from list;');
+$records = array();
+if ($query->num_rows > 0) {
+    while ($row = $query->fetch_assoc()) {
+        $records[] = $row;
+    }
+}
+
 ?>
 <style>
     *{
@@ -81,19 +88,23 @@ $products = $dom->getElementsByTagName('products')->item(0);
                 </thead>
                 <tbody>
                 <?php
-                $i=0;
-                $product=$products->getElementsByTagName('product');
-                while (is_object($product->item($i++))){
-                    ?>
-                <tr>
-                    <td><?php echo $i?></td>
-                    <td><?php echo $product->item($i-1)->getElementsByTagName('name')->item(0)->nodeValue?></td>
-                    <td><?php echo $product->item($i-1)->getElementsByTagName('price')->item(0)->nodeValue?> $</td>
-                    <td><?php echo $product->item($i-1)->getElementsByTagName('description')->item(0)->nodeValue?></td>
-                    <td><a href="index.php?page_layout=update&id=<?php echo  $product->item($i-1)->getElementsByTagName('id')->item(0)->nodeValue; ?>"> Изменить <?php echo  $product->item($i-1)->getElementsByTagName('id')->item(0)->nodeValue; ?></a></td>
-                    <td><a onclick="return Del('<?php echo $product->item($i-1)->getElementsByTagName('id')->item(0)->nodeValue;?>//')"  href= "index.php?page_layout=delete&id=<?php echo  $product->item($i-1)->getElementsByTagName('id')->item(0)->nodeValue; ?>" >Удалить </a></td>
-                </tr>
-                <?php } ?>
+				foreach ($records as $record) {
+					echo '
+						<tr>
+							<td>'.$record['id'].'</td>
+							<td class="nowrap"><a href="/index.php?id='.$record['id'].'" target="_blank">'.$record['name'].'</a></td>
+							<td class="nowrap">'.$record['price'].' $</td>
+							<td>'.$record['description'].'</td>
+							<td class="nowrap">
+								<a class="btn" href="index.php?page_layout=update&id='.$record['id'].'">Редактировать</a>
+                            </td>
+                            <td>
+								<a class="btn" href= "index.php?page_layout=delete&id='.$record['id'].'">Удалить</a>
+                            </td>
+						</tr>
+					';
+				}
+			?>
                 </tbody>
             </table>
         </div>

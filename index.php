@@ -1,8 +1,11 @@
+<?php
+require_once 'include/../database.php'
+?>
 <!doctype html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Solopov Artem lab4</title>
+    <title>lab4</title>
 </head>
 <body>
 <?php
